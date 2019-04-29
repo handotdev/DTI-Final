@@ -6,6 +6,7 @@
 
 .App__Form {
   width: 100%;
+  border: 10px solid white;
   background-color: #2E4158;
   padding: 40px;
   overflow: auto;
@@ -46,6 +47,7 @@
   font-size: .9em;
   color: white;
 }
+
 .FormField__Input {
   width: 30%;
   background-color: transparent;
