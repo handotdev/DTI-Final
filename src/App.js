@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from './config/fire';
-import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
+import { HashRouter as Router, } from 'react-router-dom';
 import Login from './login';
 import Home from './home';
 
@@ -32,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router basename="/react-auth-ui/">
+      <Router>
         <div className="App">
 
           {this.state.user ? (<Home />) : (<Login/>)}
