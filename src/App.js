@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
+import fire from './config/fire';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
-import SignUpForm from './pages/SignUpForm';
-import SignInForm from './pages/SignInForm';
+import Login from './login';
+import Home from './home';
 
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user:{}
+    };
+  }
+
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener(){
+    fire.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.setState({ user })
+      } else {
+        this.setState({ user: null });
+      }
+    })
+  }
+
   render() {
     return (
       <Router basename="/react-auth-ui/">
         <div className="App">
-          <div className="App__Form">
-              <div className="FormTitle">
-                  <NavLink to="/sign-in" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign In</NavLink> or <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign Up</NavLink>
-              </div>
 
-              <Route exact path="/" component={SignUpForm}>
-              </Route>
-              <Route path="/sign-in" component={SignInForm}>
-              </Route>
-          </div>
+          {this.state.user ? (<Home />) : (<Login/>)}
 
         </div>
       </Router>
