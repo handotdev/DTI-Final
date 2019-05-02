@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
+import fire from '../config/fire';
 
 class SignUpForm extends Component {
     constructor() {
         super();
 
+        this.signup = this.signup.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             email: '',
             password: '',
-            name: '',
-            hasAgreed: false
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
@@ -32,25 +31,33 @@ class SignUpForm extends Component {
         console.log(this.state);
     }
 
+    signup(e) {
+      e.preventDefault();
+      fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+
+      }).then((u) => {
+        console.log(u);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+
     render() {
         return (
         <div className="FormCenter">
             <form onSubmit={this.handleSubmit} className="FormFields">
+
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="name">Full Name</label>
-                <input type="text" id="name" className="FormField__Input" placeholder="Enter your full name" name="name" value={this.state.name} onChange={this.handleChange} />
+                <label className="FormField__Label" htmlFor="email">E-Mail Address</label>
+                <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange} />
               </div>
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="password">Password</label>
                 <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" value={this.state.password} onChange={this.handleChange} />
               </div>
-              <div className="FormField">
-                <label className="FormField__Label" htmlFor="email">E-Mail Address</label>
-                <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange} />
-              </div>
 
               <div className="FormField">
-                  <button className="FormField__Button mr-20">Sign Up</button>
+                  <button onClick={this.signup} className="FormField__Button mr-20">Sign Up</button>
               </div>
             </form>
           </div>

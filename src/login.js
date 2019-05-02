@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import fire from './config/fire';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import SignUpForm from './pages/SignUpForm';
 import SignInForm from './pages/SignInForm';

@@ -5,7 +5,7 @@ class SignInForm extends Component {
     constructor() {
         super();
 
-        this.login = this.login.bind(this);
+        this.signin = this.signin.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
@@ -30,7 +30,7 @@ class SignInForm extends Component {
         console.log(this.state);
     }
 
-    login(e) {
+    signin(e) {
       e.preventDefault();
       fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
 
@@ -54,7 +54,7 @@ class SignInForm extends Component {
               </div>
 
               <div className="FormField">
-                  <button onClick={this.login} className="FormField__Button mr-20">Sign In</button>
+                  <button onClick={this.signin} className="FormField__Button mr-20">Sign In</button>
               </div>
             </form>
           </div>
